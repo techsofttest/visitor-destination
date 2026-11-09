@@ -56,7 +56,7 @@ export function CoreValues({core}:Data) {
         </div>
 
         {/* Minimal Unboxed Editorial Grid matching WhyChooseUs */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 md:gap-10 lg:gap-12">
           {core?.detail.map((val,idx) => {
             const Icon = val.icon;
             return (

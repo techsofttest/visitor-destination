@@ -44,7 +44,7 @@ export function MilestoneTimeline({mile}:Data) {
           <div className="[&_p]:mt-3 [&_p]:text-sm [&_p]:text-[#666] sm:[&_p]:text-base [&_h2]:font-[family-name:var(--font-bebas)] [&_h2]:text-4xl [&_h2]:uppercase [&_h2]:tracking-[0.02em] [&_h2]:leading-tight [&_h2]:text-[#1E1A17] sm:[&_h2]:text-5xl md:[&_h2]:text-6xl" dangerouslySetInnerHTML={{__html:mile?.content ?? ""}} />
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 md:gap-6">
           {mile?.detail.map((step,idx) => (
             <div key={idx} className="relative flex flex-col">
               <div className="flex items-center gap-3">

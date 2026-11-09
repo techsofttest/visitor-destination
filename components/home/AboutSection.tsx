@@ -2,12 +2,19 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-
-export function AboutSection({about ,whatsapp}:{about:any,whatsapp:any}) {
+interface Data{
+    title: string;
+    content: string;
+    image:string;
+        detail:{
+      title:string;
+   }[];
+}
+export function AboutSection({about ,whatsapp}:{about?:Data,whatsapp:any}) {
   return (
     <section id="about" className="relative isolate min-h-[520px] overflow-hidden bg-white text-[#242424] md:min-h-[600px]">
       <Image
-        src={about.image || "/banner/b2.jpg"}
+        src={about?.image || "/banner/b2.jpg"}
         alt="Desert landscape stretching to the horizon"
         fill
         sizes="100vw"
@@ -62,23 +69,30 @@ export function AboutSection({about ,whatsapp}:{about:any,whatsapp:any}) {
 
           {/* Card Content with lighter translucent backdrop blur */}
           <div className="relative z-0 flex flex-wrap items-center justify-around gap-6 rounded-sm bg-black/20 px-6 py-7 text-sm font-medium text-white backdrop-blur-md md:text-base">
-            <div className="flex items-center gap-2.5">
-              <span className="flex text-[#FDB414]">
-                {Array.from({ length: 1 }).map((_, i) => (
-                  <Star key={i} size={16} fill="currentColor" />
-                ))}
-              </span>
-              <span className="text-white" dangerouslySetInnerHTML={{__html:about?.detail?.[0].title ?? ""}} />
-            </div>
-            <div className="flex items-center gap-2.5">
-              <span className="h-2 w-2 rounded-full bg-[#FDB414] shadow-xs" />
-              <span className="text-white" dangerouslySetInnerHTML={{__html:about?.detail?.[1].title ?? ""}} />
-            </div>
-            <div className="flex items-center gap-2.5">
-              <span className="h-2 w-2 rounded-full bg-[#FDB414] shadow-xs" />
-              <span className="text-white" dangerouslySetInnerHTML={{__html:about?.detail?.[2].title ?? ""}} />
-            </div>
-          </div>
+  {/* Index 0 with Star Icon */}
+  {about?.detail?.[0] && (
+    <div className="flex items-center gap-2.5">
+      <span className="flex text-[#FDB414]">
+        <Star size={16} fill="currentColor" />
+      </span>
+      <span
+        className="text-white"
+        dangerouslySetInnerHTML={{ __html: about.detail[0].title ?? "" }}
+      />
+    </div>
+  )}
+
+  {/* Loop through Index 1 onwards with Bullet Dot */}
+  {about?.detail?.slice(1).map((item, idx) => (
+    <div key={idx} className="flex items-center gap-2.5">
+      <span className="h-2 w-2 rounded-full bg-[#FDB414] shadow-xs" />
+      <span
+        className="text-white"
+        dangerouslySetInnerHTML={{ __html: item?.title ?? "" }}
+      />
+    </div>
+  ))}
+</div>
         </div>
       </div>
     </section>
