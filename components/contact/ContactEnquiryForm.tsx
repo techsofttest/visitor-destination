@@ -320,8 +320,9 @@ export function ContactEnquiryForm() {
             </label>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-1">
-              <div className="flex items-center justify-between gap-4 rounded-xl border border-black/20 bg-[#FAF8F5] px-4 py-3 min-h-[48px] sm:min-w-[220px]">
-                <span className="text-sm font-bold text-[#1E1A17] tracking-wide">
+              {/* Question Box & Refresh Button */}
+              <div className="flex items-center justify-between gap-3 rounded-xl border border-black/20 bg-[#FAF8F5] px-4 py-3 sm:w-1/2 min-h-[46px]">
+                <span className="text-sm font-bold text-[#1E1A17] tracking-wide select-none">
                   {captchaQuestion || "Loading..."}
                 </span>
 
@@ -334,12 +335,13 @@ export function ContactEnquiryForm() {
                   disabled={!captchaQuestion}
                   aria-label="Refresh CAPTCHA"
                   title="Refresh CAPTCHA"
-                  className="shrink-0 w-8 h-8 flex items-center justify-center rounded-lg text-[#B85D19] hover:bg-[#B85D19]/10 transition-all disabled:opacity-50 cursor-pointer"
+                  className="shrink-0 p-1.5 rounded-lg text-[#B85D19] hover:bg-[#B85D19]/10 transition-colors disabled:opacity-50 cursor-pointer"
                 >
                   <RefreshCw className="w-4 h-4" />
                 </button>
               </div>
 
+              {/* Input Box */}
               <input
                 type="text"
                 name="captcha"
@@ -348,7 +350,7 @@ export function ContactEnquiryForm() {
                 onChange={handleChange}
                 placeholder="Enter answer"
                 autoComplete="off"
-                className="flex-1 rounded-xl border border-black/20 bg-white px-4 py-3 text-sm text-[#1E1A17] placeholder:text-[#999] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
+                className="w-full sm:w-1/2 rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm text-[#1E1A17] placeholder:text-[#999] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
               />
             </div>
           </div>
