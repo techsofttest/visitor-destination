@@ -7,8 +7,6 @@ import { Button } from "@/components/ui/Button";
 export function ContactEnquiryForm({tour}:{tour:any[]}) {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaQuestion, setCaptchaQuestion] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   
   const [formData, setFormData] = useState({
@@ -17,7 +15,8 @@ export function ContactEnquiryForm({tour}:{tour:any[]}) {
     phone: "",
     selectedPackage: "Evening Desert Safari",
     tourDate: "",
-    guests: "2 Guests",
+    adult: "2",
+    kids:"",
     message: "",
   });
 
@@ -43,7 +42,8 @@ export function ContactEnquiryForm({tour}:{tour:any[]}) {
           email: formData.email,
           phone: formData.phone,
           tourDate: formData.tourDate,
-          guests: formData.guests,
+          adult: formData.adult,
+          kids: formData.kids,
           message: formData.message,
         }),
       });
@@ -61,7 +61,8 @@ export function ContactEnquiryForm({tour}:{tour:any[]}) {
         phone: "",
         selectedPackage: tour?.[0]?.title || "Evening Desert Safari",
         tourDate: "",
-        guests: "2 Guests",
+        adult: "2",
+        kids:"",
         message: "",
       });
     } catch (error) {
@@ -225,38 +226,49 @@ export function ContactEnquiryForm({tour}:{tour:any[]}) {
                 className="w-full rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm text-[#1E1A17] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
               />
             </div>
-          </div>
+  <div className="relative pt-2.5">
+    <label
+      htmlFor="adult"
+      className="absolute -top-0 left-3 z-10 bg-white px-1.5 text-[11px] font-bold uppercase tracking-wider text-[#1E1A17]"
+    >
+      Number of Adults <span className="text-[#B85D19]">*</span>
+    </label>
+    <div className="relative">
+      <input
+        id="adult"
+        name="adult"
+        type="number"
+        min="1"
+        required
+        value={formData.adult}
+        onChange={handleChange}
+        className="w-full rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm font-semibold text-[#1E1A17] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
+      />
+    </div>
+  </div>
 
-          {/* Guests Count */}
-          <div className="relative pt-2.5">
-            <label
-              htmlFor="guests"
-              className="absolute -top-0 left-3 z-10 bg-white px-1.5 text-[11px] font-bold uppercase tracking-wider text-[#1E1A17]"
-            >
-              Number of Guests
-            </label>
-            <div className="relative">
-              <select
-                id="guests"
-                name="guests"
-                value={formData.guests}
-                onChange={handleChange}
-                className="w-full appearance-none rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm font-semibold text-[#1E1A17] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
-              >
-                <option value="1 Guest">1 Guest</option>
-                <option value="2 Guests">2 Guests</option>
-                <option value="3 Guests">3 Guests</option>
-                <option value="4 Guests">4 Guests</option>
-                <option value="5 Guests">5 Guests</option>
-                <option value="6-10 Guests (Group)">6-10 Guests (Group)</option>
-                <option value="10+ Guests (Corporate / Private)">10+ Guests (Corporate / Private)</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-black/40 text-xs">
-                ▼
-              </div>
-            </div>
-          </div>
+  <div className="relative pt-2.5">
+    <label
+      htmlFor="kids"
+      className="absolute -top-0 left-3 z-10 bg-white px-1.5 text-[11px] font-bold uppercase tracking-wider text-[#1E1A17]"
+    >
+      Number of Kids
+    </label>
+    <div className="relative">
+      <input
+        id="kids"
+        name="kids"
+        type="number"
+        min="0"
+        value={formData.kids}
+        onChange={handleChange}
+        className="w-full rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm font-semibold text-[#1E1A17] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
+      />
+    </div>
+  </div>
+</div>
 
+          
           {/* Message */}
           <div className="relative pt-2.5">
             <label

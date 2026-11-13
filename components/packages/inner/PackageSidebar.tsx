@@ -51,7 +51,8 @@ export function PackageSidebar({
     email: "",
     phone: "",
     tourDate: "",
-    guests: "2 Guests",
+    adult: "2",
+    kids:"",
     message: "",
   });
 
@@ -77,7 +78,8 @@ export function PackageSidebar({
           email: formData.email,
           phone: formData.phone,
           tourDate: formData.tourDate,
-          guests: formData.guests,
+          adult: formData.adult,
+          kids: formData.kids,
           message: formData.message,
         }),
       });
@@ -94,7 +96,8 @@ export function PackageSidebar({
         email: "",
         phone: "",
         tourDate: "",
-        guests: "2 Guests",
+        adult: "2",
+        kids:"",
         message: ""
       });
     } catch (error) {
@@ -223,25 +226,43 @@ export function PackageSidebar({
                     className="w-full rounded-xl border border-black/20 bg-white px-3 py-2.5 text-xs text-[#1E1A17] focus:border-[#B85D19] focus:outline-none"
                   />
                 </div>
-              </div>
+             <div className="relative pt-2.5">
+    <label className="absolute -top-0 left-3 z-10 bg-[#FAF8F5] px-1 text-[10px] font-bold uppercase tracking-wider text-[#1E1A17]">
+                  
+     No.of Adults <span className="text-[#B85D19]">*</span>
+    </label>
+    <div className="relative">
+      <input
+        id="adult"
+        name="adult"
+        type="number"
+        min="1"
+        required
+        value={formData.adult}
+        onChange={handleChange}
+        className="w-full rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm font-semibold text-[#1E1A17] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
+      />
+    </div>
+  </div>
 
-              <div className="relative pt-2">
-                <label className="absolute -top-0 left-3 z-10 bg-[#FAF8F5] px-1 text-[10px] font-bold uppercase tracking-wider text-[#1E1A17]">
-                  Guests
-                </label>
-                <select
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleChange}
-                  className="w-full appearance-none rounded-xl border border-black/20 bg-white px-3 py-2.5 text-xs font-semibold text-[#1E1A17] focus:border-[#B85D19] focus:outline-none"
-                >
-                  <option value="1 Guest">1 Guest</option>
-                  <option value="2 Guests">2 Guests</option>
-                  <option value="3 Guests">3 Guests</option>
-                  <option value="4 Guests">4 Guests</option>
-                  <option value="5+ Guests">5+ Guests (Group)</option>
-                </select>
-              </div>
+  <div className="relative pt-2.5">
+ <label className="absolute -top-0 left-3 z-10 bg-[#FAF8F5] px-1 text-[10px] font-bold uppercase tracking-wider text-[#1E1A17]">
+                  
+      No.of Kids
+    </label>
+    <div className="relative">
+      <input
+        id="kids"
+        name="kids"
+        type="number"
+        min="0"
+        value={formData.kids}
+        onChange={handleChange}
+        className="w-full rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm font-semibold text-[#1E1A17] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
+      />
+    </div>
+  </div>
+</div>
 
               <div className="relative pt-2">
                 <label className="absolute -top-0 left-3 z-10 bg-[#FAF8F5] px-1 text-[10px] font-bold uppercase tracking-wider text-[#1E1A17]">
