@@ -4,12 +4,11 @@ import { useState, useEffect } from "react";
 import { Send, CheckCircle2, RefreshCw, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-export function ContactEnquiryForm() {
+export function ContactEnquiryForm({tour}:{tour:any[]}) {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaQuestion, setCaptchaQuestion] = useState("");
   const [captchaToken, setCaptchaToken] = useState("");
-  const [tour, setPackage] = useState<any[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   
   const [formData, setFormData] = useState({
@@ -20,7 +19,6 @@ export function ContactEnquiryForm() {
     tourDate: "",
     guests: "2 Guests",
     message: "",
-    captcha: ""
   });
 
   function handleChange(
@@ -29,37 +27,6 @@ export function ContactEnquiryForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
-
-  const loadCaptcha = async () => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/form`);
-
-      if (!response.ok) {
-        throw new Error("Unable to load CAPTCHA.");
-      }
-
-      const data = await response.json();
-
-      setCaptchaQuestion(data.question);
-      setCaptchaToken(data.captcha_token);
-      setPackage(data.tour || []);
-
-      if (data.tour?.[0]?.title && !formData.selectedPackage) {
-        setFormData((prev) => ({ ...prev, selectedPackage: data.tour[0].title }));
-      }
-
-      setFormData((prev) => ({
-        ...prev,
-        captcha: "",
-      }));
-    } catch (err) {
-      setErrorMessage("Unable to load the CAPTCHA. Please refresh the page.");
-    }
-  };
-
-  useEffect(() => {
-    loadCaptcha();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,8 +45,6 @@ export function ContactEnquiryForm() {
           tourDate: formData.tourDate,
           guests: formData.guests,
           message: formData.message,
-          captcha: formData.captcha,
-          captcha_token: captchaToken,
         }),
       });
 
@@ -98,9 +63,7 @@ export function ContactEnquiryForm() {
         tourDate: "",
         guests: "2 Guests",
         message: "",
-        captcha: ""
       });
-      await loadCaptcha();
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Unable to send your message.");
     } finally {
@@ -311,48 +274,6 @@ export function ContactEnquiryForm() {
               onChange={handleChange}
               className="w-full rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm text-[#1E1A17] placeholder:text-[#999] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
             />
-          </div>
-
-          {/* CAPTCHA Section */}
-          <div className="relative pt-2.5">
-            <label className="absolute -top-0 left-3 z-10 bg-white px-1.5 text-[11px] font-bold uppercase tracking-wider text-[#1E1A17]">
-              CAPTCHA Verification <span className="text-[#B85D19]">*</span>
-            </label>
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-1">
-              {/* Question Box & Refresh Button */}
-              <div className="flex items-center justify-between gap-3 rounded-xl border border-black/20 bg-[#FAF8F5] px-4 py-3 sm:w-1/2 min-h-[46px]">
-                <span className="text-sm font-bold text-[#1E1A17] tracking-wide select-none">
-                  {captchaQuestion || "Loading..."}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFormData((prev) => ({ ...prev, captcha: "" }));
-                    loadCaptcha();
-                  }}
-                  disabled={!captchaQuestion}
-                  aria-label="Refresh CAPTCHA"
-                  title="Refresh CAPTCHA"
-                  className="shrink-0 p-1.5 rounded-lg text-[#B85D19] hover:bg-[#B85D19]/10 transition-colors disabled:opacity-50 cursor-pointer"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Input Box */}
-              <input
-                type="text"
-                name="captcha"
-                required
-                value={formData.captcha}
-                onChange={handleChange}
-                placeholder="Enter answer"
-                autoComplete="off"
-                className="w-full sm:w-1/2 rounded-xl border border-black/20 bg-white px-3.5 py-3 text-sm text-[#1E1A17] placeholder:text-[#999] focus:border-[#B85D19] focus:outline-none focus:ring-1 focus:ring-[#B85D19]"
-              />
-            </div>
           </div>
 
           {/* Submit Button */}

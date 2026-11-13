@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { ArrowRight, Phone, ShieldCheck, Check, Send, CheckCircle2, RefreshCw, AlertCircle, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Phone, ShieldCheck, Check, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/Button";
 
@@ -44,8 +44,6 @@ export function PackageSidebar({
 }) {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaQuestion, setCaptchaQuestion] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   
   const [formData, setFormData] = useState({
@@ -55,7 +53,6 @@ export function PackageSidebar({
     tourDate: "",
     guests: "2 Guests",
     message: "",
-    captcha: ""
   });
 
   function handleChange(
@@ -64,27 +61,6 @@ export function PackageSidebar({
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
-
-  const loadCaptcha = async () => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/form`);
-
-      if (!response.ok) {
-        throw new Error("Unable to load CAPTCHA.");
-      }
-
-      const data = await response.json();
-      setCaptchaQuestion(data.question);
-      setCaptchaToken(data.captcha_token);
-      setFormData((prev) => ({ ...prev, captcha: "" }));
-    } catch (err) {
-      setErrorMessage("Unable to load the CAPTCHA. Please refresh the page.");
-    }
-  };
-
-  useEffect(() => {
-    loadCaptcha();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,8 +79,6 @@ export function PackageSidebar({
           tourDate: formData.tourDate,
           guests: formData.guests,
           message: formData.message,
-          captcha: formData.captcha,
-          captcha_token: captchaToken,
         }),
       });
 
@@ -121,10 +95,8 @@ export function PackageSidebar({
         phone: "",
         tourDate: "",
         guests: "2 Guests",
-        message: "",
-        captcha: ""
+        message: ""
       });
-      await loadCaptcha();
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Unable to send your message.");
     } finally {
@@ -152,20 +124,6 @@ export function PackageSidebar({
               <span>{info.title}</span>
             </div>
           ))}
-        </div>
-
-        {/* WhatsApp CTA Button */}
-        <div className="mt-6">
-          <Button
-            href={`https://wa.me/${book?.whatsapp}?text=${encodeURIComponent(`Hello Abu Dhabi Desert Safari, I want to book the ${currentPackage.title}.`)}`}
-            isExternal
-            variant="primary"
-            size="md"
-            showIcon
-            className="w-full justify-center text-xs font-bold uppercase tracking-wider"
-          >
-            Instant WhatsApp Booking
-          </Button>
         </div>
 
         {/* Integrated Enquiry Form Card */}
@@ -299,34 +257,6 @@ export function PackageSidebar({
                 />
               </div>
 
-              {/* CAPTCHA */}
-              <div className="relative pt-2">
-                <label className="absolute -top-0 left-3 z-10 bg-[#FAF8F5] px-1 text-[10px] font-bold uppercase tracking-wider text-[#1E1A17]">
-                  Verification <span className="text-[#B85D19]">*</span>
-                </label>
-                <div className="flex gap-2 pt-1">
-                  <div className="flex items-center justify-between rounded-xl border border-black/20 bg-white px-3 py-2 w-1/2">
-                    <span className="text-xs font-bold text-[#1E1A17]">{captchaQuestion || "Loading..."}</span>
-                    <button
-                      type="button"
-                      onClick={() => { setFormData(prev => ({ ...prev, captcha: "" })); loadCaptcha(); }}
-                      className="text-[#B85D19] hover:opacity-80"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    name="captcha"
-                    required
-                    value={formData.captcha}
-                    onChange={handleChange}
-                    placeholder="Answer"
-                    className="w-1/2 rounded-xl border border-black/20 bg-white px-3 py-2 text-xs text-[#1E1A17] focus:border-[#B85D19] focus:outline-none"
-                  />
-                </div>
-              </div>
-
               <div className="pt-1">
                 <Button
                   type="submit"
@@ -352,16 +282,7 @@ export function PackageSidebar({
             className="flex items-center gap-2 text-[#1E1E1E] hover:text-[#B85D19] transition-colors"
           >
             <Phone size={14} className="text-[#B85D19]" />
-            <span className="text-xs underline">Call +971 54 427 8880</span>
-          </a>
-          <a
-            href={`https://wa.me/${book?.whatsapp}?text=${encodeURIComponent("Hello Abu Dhabi Desert Safari, I'd like to book a tour.")}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 text-[#1E1E1E] hover:text-[#25D366] transition-colors"
-          >
-            <FaWhatsapp size={14} className="text-[#075E54]" />
-            <span className="text-xs underline">24/7 Desert Concierge Desk</span>
+            <span className="text-xs underline">Call {book?.phone}</span>
           </a>
         </div>
       </div>

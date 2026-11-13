@@ -22,6 +22,11 @@ interface ProductResponse {
     content: string;
     image:string;
   };
+   tour: {
+    id: number;
+    title: string;
+    price:string;
+  }[];
 contact:any;
 }
 
@@ -80,7 +85,7 @@ export default async function ContactPage() {
       </section>
 
       {/* 3. Section Two: Full-bleed Background Image with Form on Left Edge */}
-      <ContactFormSection imageSrc="/banner/Desert Dunes 4x4 Sunset Expedition2.png" />
+      <ContactFormSection tour={data?.tour ?? []} imageSrc="/banner/Desert Dunes 4x4 Sunset Expedition2.png" />
 
     </main>
   );

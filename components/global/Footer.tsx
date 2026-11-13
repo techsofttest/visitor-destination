@@ -154,11 +154,11 @@ export function Footer({ contact, tour }: ProductResponse) {
                   <a aria-label="GetYourGuide" href={contact?.getyourguide} target="_blank" rel="noreferrer" className="transition-transform hover:scale-110 hover:text-[#FDB414]">
                     <GetYourGuideIcon size={20} />
                   </a>
-                  <a aria-label="YouTube" href={contact?.youtube} target="_blank" rel="noreferrer" className="transition-transform hover:scale-110 hover:text-[#FDB414]">
-                    <YoutubeIcon size={21} />
-                  </a>
                   <a aria-label="Tripadvisor" href={contact?.tripadvisor} target="_blank" rel="noreferrer" className="transition-transform hover:scale-110 hover:text-[#FDB414]">
                     <TripadvisorIcon size={21} />
+                  </a>
+                  <a aria-label="YouTube" href={contact?.youtube} target="_blank" rel="noreferrer" className="transition-transform hover:scale-110 hover:text-[#FDB414]">
+                    <YoutubeIcon size={21} />
                   </a>
                 </div>
               </div>
@@ -220,11 +220,11 @@ export function Footer({ contact, tour }: ProductResponse) {
                   </div>
                   <div className="flex h-8 items-center justify-center rounded-md bg-white px-3 py-1 shadow-sm">
                     <Image
-                      src="/footer/payment-option/paypal.png"
-                      alt="PayPal"
+                      src="/footer/payment-option/ziina-logo.webp"
+                      alt="ziina"
                       width={60}
                       height={20}
-                      className="h-4.5 w-auto object-contain"
+                      className="h-8 w-auto object-cover"
                     />
                   </div>
                   <div className="flex h-8 items-center justify-center rounded-md bg-white px-3 py-1 shadow-sm">

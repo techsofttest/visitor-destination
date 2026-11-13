@@ -3,10 +3,15 @@ import { ContactEnquiryForm } from "@/components/contact/ContactEnquiryForm";
 
 interface ContactFormSectionProps {
   imageSrc?: string;
+  tour: {
+    id: number;
+    title: string;
+    price:string;
+  }[];
 }
 
 export function ContactFormSection({
-  imageSrc = "/banner/Desert Caravan Beneath Endless Skies.png",
+  imageSrc = "/banner/Desert Caravan Beneath Endless Skies.png",tour
 }: ContactFormSectionProps) {
   return (
     <section className="relative isolate min-h-[640px] overflow-hidden py-16 sm:py-20 md:py-28">
@@ -39,7 +44,7 @@ export function ContactFormSection({
 
           {/* Form on the right side */}
           <div className="w-full lg:col-span-6 xl:col-span-6">
-            <ContactEnquiryForm />
+            <ContactEnquiryForm tour={tour}/>
           </div>
         </div>
       </div>

@@ -139,15 +139,6 @@ export function Header({contact , tour}:ProductResponse) {
                   <GetYourGuideIcon size={14} />
                 </a>
                 <a
-                  aria-label="YouTube"
-                  className="transition-transform hover:scale-110 hover:text-white"
-                  href={contact?.youtube ?? ""}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <YoutubeIcon size={15} />
-                </a>
-                <a
                   aria-label="Tripadvisor"
                   className="transition-transform hover:scale-110 hover:text-white"
                   href={contact?.tripadvisor ?? ""}
@@ -155,6 +146,15 @@ export function Header({contact , tour}:ProductResponse) {
                   rel="noreferrer"
                 >
                   <TripadvisorIcon size={15} />
+                </a>
+                <a
+                  aria-label="YouTube"
+                  className="transition-transform hover:scale-110 hover:text-white"
+                  href={contact?.youtube ?? ""}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <YoutubeIcon size={15} />
                 </a>
               </div>
             </div>
