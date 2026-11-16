@@ -51,7 +51,7 @@ export function TripadvisorWidget({ className = "" }: { className?: string }) {
     <div id="TA_cdswritereviewlgvi339" class="TA_cdswritereviewlgvi">
       <ul id="soQpzY" class="TA_links Tju4DlqHB">
         <li id="nLevXlk" class="ED8KEZ">
-          <a target="_blank" href="https://www.tripadvisor.com/UserReview-g294013-d26530014-Visitors_Destination_Tours_Safari-Abu_Dhabi_Emirate_of_Abu_Dhabi.html">
+          <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g294013-d26530014-Reviews-Visitors_Destination_Tours_Safari-Abu_Dhabi_Emirate_of_Abu_Dhabi.html">
             <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/>
           </a>
         </li>
