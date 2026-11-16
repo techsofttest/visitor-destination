@@ -51,7 +51,7 @@ export function ContactInfoSection({about,contact}:{about:any,contact:any}) {
               rel="noreferrer"
               className="mt-1 inline-block text-sm font-semibold text-[#1E1A17] underline decoration-[#B85D19]/40 underline-offset-4 transition-all duration-200 hover:text-[#B85D19] hover:decoration-[#B85D19] hover:translate-x-0.5"
             >
-              {contact?.whatsapp} (24/7)
+              +{contact?.whatsapp} (24/7)
             </a>
           </div>
         </div>

@@ -50,6 +50,8 @@ interface ProductResponse {
     title: string;
     content: string;
     image: string;
+    
+    phone: string;
   };
 
 }
@@ -132,7 +134,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
       <OtherPackagesCarousel packages={data.pac ?? []} whatsapp={data.book.whatsapp} />
 
       {/* 4. Bottom CTA Section */}
-      <CtaSection cta={data?.cta} phone={data?.contact?.phone} />
+      <CtaSection cta={data?.cta} phone={data?.cta?.phone} />
     </main>
   );
 }
