@@ -44,9 +44,9 @@ export function FloatingWhatsAppButton({ className = "",whatsapp }: { className?
       </span>
 
       {/* Crisp high-contrast label */}
-      <span className="pr-1 text-[13px] font-bold tracking-tight text-white antialiased">
+      {/* <span className="pr-1 text-[13px] font-bold tracking-tight text-white antialiased">
         Chat with us
-      </span>
+      </span> */}
     </a>
   );
 }
