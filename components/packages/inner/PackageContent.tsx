@@ -122,7 +122,7 @@ export function PackageContent({ pkg,book }: { pkg: PackageDetail ,book:BookInfo
       <div className="mt-10 rounded-2xl bg-gradient-to-r from-[#1E1A17] to-[#2D241C] p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
         <div>
           <h4 className="font-[family-name:var(--font-bebas)] text-2xl uppercase tracking-wide text-white">
-            {book.title}{pkg.title}?
+            {book.title} {pkg.title}?
           </h4>
           <div className="text-xs sm:text-sm text-white/80 mt-1 max-w-md" dangerouslySetInnerHTML={{__html:book?.content ?? ""}} />
         </div>
