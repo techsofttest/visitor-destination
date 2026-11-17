@@ -161,7 +161,7 @@ export function PackagesDropdownContent({
               {/* Dynamic Tour List */}
               {activeCategory.tours?.length > 0 ? (
                 <div className="grid grid-cols-2 gap-x-5 gap-y-2">
-                {activeCategory.tours.map((pkg) => (
+                {activeCategory.tours.slice(0, 6).map((pkg) => (
                   <Link
                     key={pkg.id}
                     href={`/packages/${pkg.slug}`}
